@@ -1,0 +1,520 @@
+<title>99aupairs — SEO & AI-Authority Scorecard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{
+    --paper:#FAF6F4; --paper-2:#FFFFFF; --card:#FFFFFF;
+    --ink:#211A22; --ink-2:#4A4048; --muted:#8A7F86;
+    --line:#EADFE2; --line-2:#E0D2D7;
+    --brand:#B23A6B; --brand-soft:#E8749A; --brand-wash:#FBEDF2;
+    --red:#CF4438; --amber:#C9831F; --green:#2F9E6A;
+    --red-wash:#FBECEA; --amber-wash:#FAF1E2; --green-wash:#E9F5EF;
+    --shadow:0 1px 2px rgba(33,26,34,.04), 0 8px 24px rgba(33,26,34,.06);
+    --radius:14px;
+    --serif:Georgia,"Iowan Old Style","Times New Roman",serif;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:"SF Mono","Cascadia Code",ui-monospace,Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --paper:#17131A; --paper-2:#1E1922; --card:#221C27;
+      --ink:#F4ECF0; --ink-2:#CDBFC8; --muted:#9C8E98;
+      --line:#312836; --line-2:#3C3141;
+      --brand:#E8749A; --brand-soft:#F0A0BC; --brand-wash:#2B1B25;
+      --red:#F0776C; --amber:#E7A84E; --green:#5FC496;
+      --red-wash:#2E1B1D; --amber-wash:#2C2318; --green-wash:#17271F;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"]{
+    --paper:#FAF6F4; --paper-2:#FFFFFF; --card:#FFFFFF;
+    --ink:#211A22; --ink-2:#4A4048; --muted:#8A7F86;
+    --line:#EADFE2; --line-2:#E0D2D7;
+    --brand:#B23A6B; --brand-soft:#E8749A; --brand-wash:#FBEDF2;
+    --red:#CF4438; --amber:#C9831F; --green:#2F9E6A;
+    --red-wash:#FBECEA; --amber-wash:#FAF1E2; --green-wash:#E9F5EF;
+    --shadow:0 1px 2px rgba(33,26,34,.04), 0 8px 24px rgba(33,26,34,.06);
+  }
+  :root[data-theme="dark"]{
+    --paper:#17131A; --paper-2:#1E1922; --card:#221C27;
+    --ink:#F4ECF0; --ink-2:#CDBFC8; --muted:#9C8E98;
+    --line:#312836; --line-2:#3C3141;
+    --brand:#E8749A; --brand-soft:#F0A0BC; --brand-wash:#2B1B25;
+    --red:#F0776C; --amber:#E7A84E; --green:#5FC496;
+    --red-wash:#2E1B1D; --amber-wash:#2C2318; --green-wash:#17271F;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+    line-height:1.55;-webkit-font-smoothing:antialiased;font-size:16px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  section{padding:46px 0;border-top:1px solid var(--line)}
+  section:first-of-type{border-top:none}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;text-wrap:balance;letter-spacing:-.01em;margin:0}
+  h2{font-size:clamp(22px,3.4vw,30px);line-height:1.15}
+  h3{font-size:18px;line-height:1.25}
+  p{margin:0}
+  a{color:var(--brand);text-decoration:none}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--brand);outline-offset:3px;border-radius:6px}
+  .eyebrow{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--brand);margin-bottom:10px}
+  .lede{color:var(--ink-2);font-size:17px;max-width:64ch}
+  .muted{color:var(--muted)}
+  .tnum{font-variant-numeric:tabular-nums}
+  header.bar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .bar .wrap{display:flex;align-items:center;gap:16px;height:58px}
+  .logo{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:-.02em;font-size:16px}
+  .logo .dot{width:11px;height:11px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px var(--brand-wash)}
+  .bar nav{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
+  .bar nav a{font-family:var(--sans);font-size:13px;color:var(--ink-2);padding:7px 10px;border-radius:8px}
+  .bar nav a:hover{background:var(--brand-wash);color:var(--brand)}
+  @media (max-width:720px){.bar nav{display:none}}
+  .hero{padding-top:40px}
+  .hero h1{font-size:clamp(30px,5.4vw,50px);line-height:1.04}
+  .hero .kicker{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:16px}
+  .hero .kicker b{color:var(--brand)}
+  .hero p.lede{margin-top:16px;font-size:18px}
+  .meter{margin-top:34px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:26px 26px 30px}
+  .meter .top{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 18px;margin-bottom:22px}
+  .meter .big{font-family:var(--serif);font-size:58px;line-height:.9;font-weight:600}
+  .meter .big .u{font-size:22px;color:var(--muted)}
+  .meter .arrow{font-size:26px;color:var(--muted);font-family:var(--sans)}
+  .meter .goal{font-family:var(--serif);font-size:40px;line-height:.9;color:var(--green);font-weight:600}
+  .meter .tag{margin-left:auto;font-size:12.5px;color:var(--ink-2);max-width:30ch;text-align:right}
+  .track{position:relative;height:16px;border-radius:20px;
+    background:linear-gradient(90deg,var(--red) 0%,var(--amber) 46%,var(--green) 100%);opacity:.9}
+  .track .band{position:absolute;top:-7px;bottom:-7px;background:var(--card);width:2px;opacity:.5}
+  .mk{position:absolute;top:-9px;transform:translateX(-50%);text-align:center}
+  .mk .pin{width:2px;height:34px;background:var(--ink);margin:0 auto;border-radius:2px}
+  .mk .lab{margin-top:6px;font-size:11px;font-weight:700;white-space:nowrap;
+    background:var(--ink);color:var(--paper);padding:2px 7px;border-radius:20px}
+  .mk.goal .pin{background:var(--green)} .mk.goal .lab{background:var(--green);color:#fff}
+  .scale{display:flex;justify-content:space-between;margin-top:30px;font-size:11px;color:var(--muted);
+    text-transform:uppercase;letter-spacing:.08em}
+  .subs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+  @media (max-width:620px){.subs{grid-template-columns:1fr}.meter .tag{text-align:left;margin-left:0}}
+  .sub{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
+  .sub .n{font-family:var(--serif);font-size:34px;font-weight:600}
+  .sub .h{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+  .sub.good .n{color:var(--green)} .sub.bad .n{color:var(--red)}
+  .sub p{font-size:13.5px;color:var(--ink-2);margin-top:8px}
+  .bar-mini{height:7px;border-radius:6px;background:var(--line);margin-top:12px;overflow:hidden}
+  .bar-mini i{display:block;height:100%;border-radius:6px}
+  .shead{max-width:66ch;margin-bottom:26px}
+  .shead p{margin-top:10px;color:var(--ink-2)}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  @media (max-width:760px){.grid{grid-template-columns:1fr}}
+  .pill{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px 16px 15px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .pill:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px}
+  .pill.r:before{background:var(--red)} .pill.a:before{background:var(--amber)} .pill.g:before{background:var(--green)}
+  .pill .ph{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}
+  .pill h3{font-family:var(--sans);font-size:15px;font-weight:700;flex:1;letter-spacing:0}
+  .pill .idx{font-family:var(--mono);font-size:11px;color:var(--muted);padding-top:2px}
+  .scores{display:flex;align-items:center;gap:8px;margin:2px 0 12px}
+  .chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;
+    padding:3px 9px;border-radius:20px;font-variant-numeric:tabular-nums}
+  .chip .d{width:8px;height:8px;border-radius:50%}
+  .chip.r{background:var(--red-wash);color:var(--red)} .chip.r .d{background:var(--red)}
+  .chip.a{background:var(--amber-wash);color:var(--amber)} .chip.a .d{background:var(--amber)}
+  .chip.g{background:var(--green-wash);color:var(--green)} .chip.g .d{background:var(--green)}
+  .scores .to{color:var(--muted);font-size:15px}
+  .hn{font-size:13px;line-height:1.5;margin-top:7px;color:var(--ink-2)}
+  .hn b{color:var(--ink);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.06em;
+    display:inline-block;min-width:38px}
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:640px;background:var(--card)}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700;
+    background:var(--paper-2);position:sticky;top:0}
+  tr:last-child td{border-bottom:none}
+  td b{color:var(--ink)}
+  .state{display:inline-block;font-size:11px;font-weight:800;padding:3px 8px;border-radius:6px;white-space:nowrap;letter-spacing:.03em}
+  .state.have{background:var(--green-wash);color:var(--green)}
+  .state.part{background:var(--amber-wash);color:var(--amber)}
+  .state.build{background:var(--red-wash);color:var(--red)}
+  .sprints{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media (max-width:820px){.sprints{grid-template-columns:1fr}}
+  .sprint{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+  .sprint .days{font-family:var(--mono);font-size:12px;color:var(--brand);font-weight:700}
+  .sprint h3{font-family:var(--serif);margin:6px 0 3px;font-size:21px}
+  .sprint .sub2{font-size:12.5px;color:var(--muted);margin-bottom:14px}
+  .sprint ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px}
+  .sprint li{font-size:13.5px;color:var(--ink-2);padding-left:20px;position:relative}
+  .sprint li:before{content:"";position:absolute;left:2px;top:7px;width:7px;height:7px;border-radius:2px;background:var(--brand-soft)}
+  .sprint .goal2{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line-2);font-size:12.5px}
+  .sprint .goal2 b{color:var(--brand)}
+  .kpi-row{display:grid;grid-template-columns:1fr auto auto;gap:0;align-items:center;
+    padding:13px 4px;border-bottom:1px solid var(--line);font-size:14px}
+  .kpi-row.head{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700}
+  .kpi-row .o{color:var(--muted);text-align:right;min-width:150px;padding-right:20px;font-size:13px}
+  .kpi-row .n{color:var(--green);font-weight:700;text-align:right;min-width:150px}
+  @media (max-width:600px){.kpi-row{grid-template-columns:1fr;gap:2px;text-align:left}
+    .kpi-row .o,.kpi-row .n{text-align:left;min-width:0;padding:0}}
+  .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+  .box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow)}
+  .box .t{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+  .box.win .t{color:var(--green)} .box.cut .t{color:var(--amber)} .box.fix .t{color:var(--brand)}
+  .box ul{margin:0;padding-left:18px;font-size:13.5px;color:var(--ink-2);display:flex;flex-direction:column;gap:7px}
+  .box ul li::marker{color:var(--brand-soft)}
+  .plays{display:flex;flex-direction:column;gap:12px}
+  .play{display:flex;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px 18px;box-shadow:var(--shadow)}
+  .play .num{font-family:var(--serif);font-size:26px;color:var(--brand);font-weight:600;line-height:1;min-width:26px}
+  .play h3{font-family:var(--sans);font-size:14.5px;font-weight:700;margin-bottom:4px}
+  .play p{font-size:13.5px;color:var(--ink-2)}
+  .callout{background:var(--brand-wash);border:1px solid var(--line-2);border-radius:var(--radius);padding:20px 22px;margin-top:8px}
+  .callout p{color:var(--ink);font-size:15px}
+  .callout p+p{margin-top:10px}
+  footer{padding:40px 0 60px;color:var(--muted);font-size:12.5px}
+  footer .wrap>p+p{margin-top:10px}
+  .note{font-size:12.5px;color:var(--muted);margin-top:14px;line-height:1.6}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px;font-size:12px;color:var(--ink-2)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .legend i{width:10px;height:10px;border-radius:50%}
+</style>
+
+<header class="bar">
+  <div class="wrap">
+    <div class="logo"><span class="dot"></span>99aupairs</div>
+    <nav>
+      <a href="#score">Score</a>
+      <a href="#pillars">13 Pillars</a>
+      <a href="#inventory">Have vs Build</a>
+      <a href="#plan">90-Day Plan</a>
+      <a href="#kpi">KPIs</a>
+      <a href="#review">Plan Review</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="score">
+  <div class="wrap">
+    <div class="kicker">SEO &amp; Google <b>AI-Overview</b> Authority &nbsp;·&nbsp; 90-Day Scorecard &nbsp;·&nbsp; July 2026</div>
+    <h1>You don't have a content problem.<br>You have a <em>publishing</em> problem.</h1>
+    <p class="lede">99aupairs already owns the assets most agencies never build — guides, original data, tools, awards, national media, a founder story and 1,000+ families. Almost none of it is live as answer-first, schema-marked, interlinked pages. That gap is the whole opportunity: converting what exists is faster than creating from zero.</p>
+
+    <div class="meter">
+      <div class="top">
+        <div class="big tnum">33<span class="u">/100</span></div>
+        <div class="arrow">&rarr;</div>
+        <div class="goal tnum">74<span class="u" style="font-size:18px">/100</span></div>
+        <div class="tag">Current blended authority score today, and where 90 focused days can realistically land it.</div>
+      </div>
+      <div class="track" role="img" aria-label="Authority score today is 33 out of 100; 90-day target is 74 out of 100">
+        <div class="band" style="left:40%"></div>
+        <div class="band" style="left:70%"></div>
+        <div class="mk" style="left:33%"><div class="pin"></div><div class="lab">Today &middot; 33</div></div>
+        <div class="mk goal" style="left:74%"><div class="pin"></div><div class="lab">90 days &middot; 74</div></div>
+      </div>
+      <div class="scale"><span>Invisible 0</span><span>Emerging 40</span><span>Trusted 70</span><span>Cited authority 100</span></div>
+      <div class="subs">
+        <div class="sub good">
+          <div class="h">Asset readiness</div>
+          <div class="n tnum">72</div>
+          <p>The raw materials — drafted guides, original data, tools, media, founder credibility. This is genuinely top-decile for an Australian agency.</p>
+          <div class="bar-mini"><i style="width:72%;background:var(--green)"></i></div>
+        </div>
+        <div class="sub bad">
+          <div class="h">Published authority</div>
+          <div class="n tnum">28</div>
+          <p>How much of it Google can actually see and cite: live pages, schema, answer-first structure, off-site validation. This is the number the next 90 days moves.</p>
+          <div class="bar-mini"><i style="width:28%;background:var(--red)"></i></div>
+        </div>
+      </div>
+    </div>
+    <div class="legend" aria-hidden="true">
+      <span><i style="background:var(--red)"></i> Red &middot; 0&ndash;39 (missing / not live)</span>
+      <span><i style="background:var(--amber)"></i> Amber &middot; 40&ndash;69 (partial / drafted)</span>
+      <span><i style="background:var(--green)"></i> Green &middot; 70&ndash;100 (live, structured, validated)</span>
+    </div>
+  </div>
+</section>
+
+<section id="pillars">
+  <div class="wrap">
+    <div class="shead">
+      <div class="eyebrow">The traffic light</div>
+      <h2>13 pillars, scored today &rarr; 90-day target</h2>
+      <p>The ChatGPT plan's 20 phases, rolled into 13 things you can actually score and own. Each is rated on four signals: does the asset <em>exist</em>, is it <em>published live</em>, is it <em>answer-first + schema-marked</em>, and is it <em>validated off-site</em>. Weighted by AI-Overview impact.</p>
+    </div>
+    <div class="grid">
+      <div class="pill a">
+        <div class="ph"><h3>Pillar &amp; Knowledge Hub</h3><span class="idx">P1&middot;2&middot;14</span></div>
+        <div class="scores"><span class="chip a"><span class="d"></span>42</span><span class="to">&rarr;</span><span class="chip g"><span class="d"></span>85</span></div>
+        <p class="hn"><b>Have</b> 4 near-final drafts of "Au Pair in Australia — The Complete 2026 Guide" (v4 is FINAL).</p>
+        <p class="hn"><b>Need</b> Consolidate to one live pillar; interlink a cluster; add schema.</p>
+      </div>
+      <div class="pill r">
+        <div class="ph"><h3>AI-Overview answer-first &amp; FAQ</h3><span class="idx">P3</span></div>
+        <div class="scores"><span class="chip r"><span class="d"></span>15</span><span class="to">&rarr;</span><span class="chip g"><span class="d"></span>78</span></div>
+        <p class="hn"><b>Have</b> Q&amp;A material buried inside prose.</p>
+        <p class="hn"><b>Need</b> 40&ndash;60 word direct answers under every H1; FAQPage schema everywhere.</p>
+      </div>
+      <div class="pill r">
+        <div class="ph"><h3>Search-intent &amp; local pages</h3><span class="idx">P4&middot;17</span></div>
+        <div class="scores"><span class="chip r"><span class="d"></span>20</span><span class="to">&rarr;</span><span class="chip a"><span class="d"></span>60</span></div>
+        <p class="hn"><b>Have</b> Irene's Melbourne + comparison voice-memo script started.</p>
+        <p class="hn"><b>Need</b> Live city pages (Melbourne, Sydney, Brisbane, Perth) with local proof.</p>
+      </div>
+      <div class="pill a">
+        <div class="ph"><h3>Comparison pages</h3><span class="idx">P15</span></div>
+        <div class="scores"><span class="chip a"><span class="d"></span>40</span><span class="to">&rarr;</span><span class="chip g"><span class="d"></span>80</span></div>
+        <p class="hn"><b>Have</b> Research Pack: Au Pair vs Nanny vs Daycare + Agency comparison.</p>
+        <p class="hn"><b>Need</b> Publish as 3&ndash;5 pages with comparison tables + schema.</p>
+      </div>
+      <div class="pill r">
+        <div class="ph"><h3>Original research / data report</h3><span class="idx">P5&middot;6</span></div>
+        <div class="scores"><span class="chip r"><span class="d"></span>25</span><span class="to">&rarr;</span><span class="chip a"><span class="d"></span>65</span></div>
+        <p class="hn"><b>Have</b> 1,000+ families, placement data, CCS-sourced cost figures.</p>
+        <p class="hn"><b>Need</b> One flagship "State of Au Pairing in Australia 2026" report.</p>
+      </div>
+      <div class="pill a">
+        <div class="ph"><h3>Interactive tools</h3><span class="idx">P7</span></div>
+        <div class="scores"><span class="chip a"><span class="d"></span>55</span><span class="to">&rarr;</span><span class="chip g"><span class="d"></span>78</span></div>
+        <p class="hn"><b>Have</b> Childcare Calculator — live and genuinely differentiated.</p>
+        <p class="hn"><b>Need</b> Pocket-money + Au Pair-vs-Nanny cost calculators; SoftwareApp schema.</p>
+      </div>
+      <div class="pill a">
+        <div class="ph"><h3>Reviews &amp; reputation</h3><span class="idx">P8</span></div>
+        <div class="scores"><span class="chip a"><span class="d"></span>60</span><span class="to">&rarr;</span><span class="chip g"><span class="d"></span>82</span></div>
+        <p class="hn"><b>Have</b> Hundreds of Google reviews + testimonial videos.</p>
+        <p class="hn"><b>Need</b> On-site reviews page with schema; Trustpilot / ProductReview presence.</p>
+      </div>
+      <div class="pill r">
+        <div class="ph"><h3>Community &amp; Reddit</h3><span class="idx">P9</span></div>
+        <div class="scores"><span class="chip r"><span class="d"></span>10</span><span class="to">&rarr;</span><span class="chip a"><span class="d"></span>50</span></div>
+        <p class="hn"><b>Have</b> Nothing structured.</p>
+        <p class="hn"><b>Need</b> Weekly genuinely-helpful answers where AI harvests discussion.</p>
+      </div>
+      <div class="pill r">
+        <div class="ph"><h3>YouTube &amp; video</h3><span class="idx">P10</span></div>
+        <div class="scores"><span class="chip r"><span class="d"></span>30</span><span class="to">&rarr;</span><span class="chip a"><span class="d"></span>58</span></div>
+        <p class="hn"><b>Have</b> Dozens of au-pair intro + host-family testimonial clips.</p>
+        <p class="hn"><b>Need</b> A channel: 12 flagship videos with transcripts + VideoObject schema.</p>
+      </div>
+      <div class="pill r">
+        <div class="ph"><h3>Schema &amp; technical SEO</h3><span class="idx">P11</span></div>
+        <div class="scores"><span class="chip r"><span class="d"></span>18</span><span class="to">&rarr;</span><span class="chip g"><span class="d"></span>80</span></div>
+        <p class="hn"><b>Have</b> Little to no structured data evident.</p>
+        <p class="hn"><b>Need</b> Article, FAQ, HowTo, Review, Org, Author, Breadcrumb, LocalBusiness.</p>
+      </div>
+      <div class="pill a">
+        <div class="ph"><h3>Author &amp; E-E-A-T</h3><span class="idx">P12</span></div>
+        <div class="scores"><span class="chip a"><span class="d"></span>45</span><span class="to">&rarr;</span><span class="chip g"><span class="d"></span>80</span></div>
+        <p class="hn"><b>Have</b> Irene Becker: Mamamia article, CAPAA visa proposal, award entries.</p>
+        <p class="hn"><b>Need</b> A real author page + <span class="tnum">sameAs</span> links; bylines on every guide.</p>
+      </div>
+      <div class="pill a">
+        <div class="ph"><h3>Backlinks &amp; digital PR</h3><span class="idx">P13</span></div>
+        <div class="scores"><span class="chip a"><span class="d"></span>42</span><span class="to">&rarr;</span><span class="chip a"><span class="d"></span>62</span></div>
+        <p class="hn"><b>Have</b> National media, CAPAA membership, award shortlists.</p>
+        <p class="hn"><b>Need</b> Turn the data report into earned links from unis, parenting orgs, HR/EAPs.</p>
+      </div>
+      <div class="pill r">
+        <div class="ph"><h3>Topical expansion beyond "au pair"</h3><span class="idx">P19</span></div>
+        <div class="scores"><span class="chip r"><span class="d"></span>25</span><span class="to">&rarr;</span><span class="chip a"><span class="d"></span>58</span></div>
+        <p class="hn"><b>Have</b> Childcare-subsidy + return-to-work angles inside the calculator.</p>
+        <p class="hn"><b>Need</b> A "modern family care decisions" cluster — the real moat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="inventory">
+  <div class="wrap">
+    <div class="shead">
+      <div class="eyebrow">Have vs build</div>
+      <h2>Every asset on your Drive, mapped to the page it unlocks</h2>
+      <p>This is why the target is aggressive but realistic — most of column one already exists. The work is conversion, not invention.</p>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>What's on the Drive today</th><th>Status</th><th>What it unlocks</th></tr></thead>
+        <tbody>
+          <tr><td><b>4&times; "Complete 2026 Guide" drafts</b> (v4 FINAL)</td><td><span class="state part">Drafted</span></td><td>The flagship pillar page + FAQ hub</td></tr>
+          <tr><td><b>Research Pack</b> — Au Pair vs Nanny vs Daycare + Agency</td><td><span class="state part">Drafted</span></td><td>3&ndash;5 comparison pages (high-intent, AI-friendly)</td></tr>
+          <tr><td><b>Melbourne voice-memo script</b> (12 questions)</td><td><span class="state part">Partial</span></td><td>Melbourne + city local pages</td></tr>
+          <tr><td><b>CCS Rules — government sources doc</b></td><td><span class="state have">Ready</span></td><td>Citations spine for E-E-A-T + calculator content</td></tr>
+          <tr><td><b>Childcare Calculator 2026</b></td><td><span class="state have">Live</span></td><td>Tool page + embeds + SoftwareApplication schema</td></tr>
+          <tr><td><b>MAIA</b> (video interview) &amp; <b>Donna</b> (AI reception)</td><td><span class="state have">Live</span></td><td>Innovation/technology authority pages</td></tr>
+          <tr><td><b>Mamamia article + CAPAA visa proposal</b></td><td><span class="state have">Ready</span></td><td>Irene Becker author page + press page</td></tr>
+          <tr><td><b>Glen Eira + Ausmumpreneur award entries</b></td><td><span class="state have">Ready</span></td><td>Trust/awards page + digital-PR hooks</td></tr>
+          <tr><td><b>Hundreds of Google review screenshots</b></td><td><span class="state have">Live</span></td><td>On-site reviews page + Review/AggregateRating schema</td></tr>
+          <tr><td><b>Au-pair intro + testimonial videos</b></td><td><span class="state part">Raw</span></td><td>YouTube channel + VideoObject schema</td></tr>
+          <tr><td><b>1,000+ families &amp; placement data</b></td><td><span class="state part">Raw</span></td><td>"State of Au Pairing in Australia 2026" report</td></tr>
+          <tr><td>Answer-first FAQ blocks</td><td><span class="state build">Build</span></td><td>AI-Overview eligibility on core queries</td></tr>
+          <tr><td>Structured data (schema) across the site</td><td><span class="state build">Build</span></td><td>Rich results + machine-readable authority</td></tr>
+          <tr><td>Off-Google reviews + Reddit presence</td><td><span class="state build">Build</span></td><td>Third-party validation AI Overviews look for</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">11 of 14 rows already exist in some form. The three "Build" rows are the genuinely new work — and two of them (schema, FAQ blocks) are format work layered onto content you already have.</p>
+  </div>
+</section>
+
+<section id="plan">
+  <div class="wrap">
+    <div class="shead">
+      <div class="eyebrow">The 90 days</div>
+      <h2>Three sprints, sequenced by return</h2>
+      <p>Publish what exists first (fastest authority gain), then build the moat, then earn the citations that AI Overviews actually reward.</p>
+    </div>
+    <div class="sprints">
+      <div class="sprint">
+        <div class="days">DAYS 1&ndash;30</div>
+        <h3>Convert</h3>
+        <div class="sub2">Publish what's already written.</div>
+        <ul>
+          <li>Ship the consolidated pillar page + FAQ + full schema</li>
+          <li>Publish the 3 comparison pages from the Research Pack</li>
+          <li>Melbourne + 2 more city pages live</li>
+          <li>Irene Becker author page (E-E-A-T + <span class="tnum">sameAs</span>)</li>
+          <li>On-site reviews page pulling existing testimonials</li>
+          <li>Article / Org / Breadcrumb / Review schema sitewide</li>
+        </ul>
+        <div class="goal2">Exit: <b>10 authority pages live</b>, answer-first + schema on all.</div>
+      </div>
+      <div class="sprint">
+        <div class="days">DAYS 31&ndash;60</div>
+        <h3>Expand</h3>
+        <div class="sub2">Build what competitors can't copy.</div>
+        <ul>
+          <li>Publish flagship <b>State of Au Pairing 2026</b> data report</li>
+          <li>Remaining city pages + 2 more comparisons</li>
+          <li>Two new calculators (pocket money, au pair vs nanny cost)</li>
+          <li>"Modern family care" topical cluster (subsidy, return to work)</li>
+          <li>Launch Trustpilot + ProductReview profiles</li>
+        </ul>
+        <div class="goal2">Exit: <b>20 pages + 3 tools live</b>, report ready to pitch.</div>
+      </div>
+      <div class="sprint">
+        <div class="days">DAYS 61&ndash;90</div>
+        <h3>Amplify</h3>
+        <div class="sub2">Earn the citations.</div>
+        <ul>
+          <li>YouTube channel: 12 flagship videos from existing clips</li>
+          <li>Digital-PR push on the report (journalists, universities)</li>
+          <li>Weekly helpful Reddit answers on core threads</li>
+          <li>Backlink outreach: parenting orgs, women's orgs, HR/EAPs</li>
+          <li>Measure AI-Overview inclusion for core queries</li>
+        </ul>
+        <div class="goal2">Exit: <b>referring-domain pipeline live</b>, AI-Overview inclusion on 6 queries.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kpi">
+  <div class="wrap">
+    <div class="shead">
+      <div class="eyebrow">KPIs &middot; a reality check</div>
+      <h2>Fewer, deeper targets beat vanity volume</h2>
+      <p>The original plan's headline numbers reward output, not authority. Here's the same ambition, re-cut so every target actually moves the score above.</p>
+    </div>
+    <div>
+      <div class="kpi-row head"><span>Metric</span><span class="o">ChatGPT plan</span><span class="n">Recommended</span></div>
+      <div class="kpi-row"><span>New pages</span><span class="o">100+</span><span class="n tnum">20 authority pages</span></div>
+      <div class="kpi-row"><span>Original research</span><span class="o">implied</span><span class="n">1 flagship data report</span></div>
+      <div class="kpi-row"><span>Videos</span><span class="o">100</span><span class="n tnum">12 flagship + transcripts</span></div>
+      <div class="kpi-row"><span>Google reviews</span><span class="o">300+</span><span class="n">Genuine steady velocity</span></div>
+      <div class="kpi-row"><span>Referring domains</span><span class="o">100+</span><span class="n tnum">40 relevant + PR pipeline</span></div>
+      <div class="kpi-row"><span>Author authority</span><span class="o">author pages</span><span class="n">Irene = named, cited expert</span></div>
+      <div class="kpi-row"><span>The real target</span><span class="o">rank top 3</span><span class="n">AI-Overview inclusion, 6 queries</span></div>
+    </div>
+    <p class="note">Why: Google's AI systems weight original information, third-party validation and comprehensive topic coverage over raw page count. Twenty pages that each answer a question completely will out-cite a hundred thin ones.</p>
+  </div>
+</section>
+
+<section id="ai">
+  <div class="wrap">
+    <div class="shead">
+      <div class="eyebrow">The winnable battle</div>
+      <h2>How to actually get cited in AI Overviews</h2>
+      <p>Ranking #1 and being quoted by Google's AI are now two different algorithms. Five tactics that move the second one — apply to every page you publish.</p>
+    </div>
+    <div class="plays">
+      <div class="play"><div class="num">1</div><div><h3>Answer in the first 60 words</h3><p>Open each page with a direct, 40&ndash;60 word answer to the exact question — no "Welcome to our guide". This is the block AI lifts verbatim.</p></div></div>
+      <div class="play"><div class="num">2</div><div><h3>Phrase headings as questions</h3><p>H2s written as the real query ("How much does an au pair cost in Australia?") map cleanly to how people and AI ask.</p></div></div>
+      <div class="play"><div class="num">3</div><div><h3>Make facts extractable</h3><p>Costs, rules and comparisons in tables and lists, not paragraphs — structured facts are what AI pulls into an Overview.</p></div></div>
+      <div class="play"><div class="num">4</div><div><h3>Be one consistent entity</h3><p>Same name, address and <span class="tnum">sameAs</span> links (LinkedIn, Mamamia, CAPAA) everywhere, so Google resolves 99aupairs and Irene as trusted entities.</p></div></div>
+      <div class="play"><div class="num">5</div><div><h3>Get validated off-site</h3><p>The biggest lever, and the one the original plan under-weights: AI Overviews cite authoritative <em>third-party</em> mentions. The data report is your engine for earning them.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="review">
+  <div class="wrap">
+    <div class="shead">
+      <div class="eyebrow">Honest review of the ChatGPT plan</div>
+      <h2>What to keep, what to cut, what to fix</h2>
+    </div>
+    <div class="cols">
+      <div class="box win">
+        <div class="t">Keep — it's right</div>
+        <ul>
+          <li>AI-Overview as a separate, winnable battle</li>
+          <li>Topic clusters over standalone pages</li>
+          <li>Answer-first structure for every page</li>
+          <li>"Become the source everyone quotes" via original data</li>
+          <li>Reposition around <em>family care decisions</em>, not just "au pair"</li>
+        </ul>
+      </div>
+      <div class="box cut">
+        <div class="t">Cut — vanity at this stage</div>
+        <ul>
+          <li>100+ pages in 90 days &rarr; dilutes quality &amp; internal links</li>
+          <li>100 YouTube videos &rarr; 12 great ones out-perform</li>
+          <li>"300 reviews" &rarr; chase genuine velocity, not a number</li>
+          <li>20+ tools &rarr; 3 excellent tools beat 20 half-built ones</li>
+        </ul>
+      </div>
+      <div class="box fix">
+        <div class="t">Fix — the missing weight</div>
+        <ul>
+          <li>Plan over-indexes on <em>your own</em> page volume</li>
+          <li>Under-weights third-party citations — the real AI lever</li>
+          <li>No sequencing: publish existing drafts <em>before</em> writing new</li>
+          <li>Add schema as a day-one requirement, not "Phase 11"</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout">
+      <p><strong>The one strategic shift worth making:</strong> the plan's best idea is buried at the end — stop positioning as an au pair agency and become <em>Australia's authority on modern family-care decisions</em>. Everything you've built (the calculator, MAIA, Donna, the research, the awards, Irene's story) already supports it, and it expands your footprint from a few thousand "au pair" searches to hundreds of thousands around childcare cost, subsidy, return-to-work and nanny comparisons.</p>
+      <p>That breadth of genuine expertise is exactly what AI Overviews reward — and it's a moat AIFS, Dream Nannies and JCR can't quickly copy.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Methodology.</strong> Each pillar is scored 0&ndash;100 on four signals — asset exists, published live, answer-first + schema-marked, validated off-site — then weighted by AI-Overview impact (pillar hub, answer-first, schema and author/E-E-A-T carry the highest weight) to a blended top-line. Red 0&ndash;39 &middot; Amber 40&ndash;69 &middot; Green 70&ndash;100.</p>
+    <p><strong>Baseline caveat.</strong> Current scores are an expert estimate from an audit of the 99aupairs Google Drive, not from live analytics. Three inputs would sharpen them and let the team re-score monthly: a Search Console query export, a crawl of currently-live pages, and current review + referring-domain counts.</p>
+    <p class="muted">Built from the 99aupairs Drive audit &middot; figures trace to the CCS government-sources doc and existing 99aupairs assets &middot; no statistics invented.</p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduce){ return; }
+    var marks = document.querySelectorAll('.mk');
+    marks.forEach(function(m){
+      m.dataset.tf = m.style.transform;
+      m.style.opacity = '0';
+      m.style.transition = 'opacity .6s ease, transform .6s ease';
+      m.style.transform = m.dataset.tf + ' translateY(-6px)';
+    });
+    requestAnimationFrame(function(){
+      setTimeout(function(){
+        marks.forEach(function(m,i){
+          setTimeout(function(){ m.style.opacity='1'; m.style.transform = m.dataset.tf; }, 250 + i*220);
+        });
+      }, 120);
+    });
+  })();
+</script>
