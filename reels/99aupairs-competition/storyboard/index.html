@@ -1,0 +1,496 @@
+<title>99aupairs Competition Reel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;800&family=JetBrains+Mono:wght@400;700&display=swap">
+
+<style>
+:root{
+  --ground:#E9F0F0; --surface:#FFFFFF; --surface-2:#F3F8F8; --line:#C7D8D8;
+  --line-soft:#DDE9E9; --ink:#0A2226; --ink-2:#4B686B; --ink-3:#779497;
+  --ocean:#00808F; --ocean-soft:#D5EDF0; --sun:#D14A15; --dusk:#3B4E8F;
+  --shadow:0 1px 2px rgba(10,34,38,.06), 0 12px 34px rgba(10,34,38,.09);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#06181B; --surface:#0D2428; --surface-2:#123035; --line:#1E4247;
+    --line-soft:#173338; --ink:#DEEDEC; --ink-2:#8DACAE; --ink-3:#6E8F92;
+    --ocean:#3FCADC; --ocean-soft:#0F383E; --sun:#FF8A4C; --dusk:#8093D8;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 40px rgba(0,0,0,.45);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#06181B; --surface:#0D2428; --surface-2:#123035; --line:#1E4247;
+  --line-soft:#173338; --ink:#DEEDEC; --ink-2:#8DACAE; --ink-3:#6E8F92;
+  --ocean:#3FCADC; --ocean-soft:#0F383E; --sun:#FF8A4C; --dusk:#8093D8;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 40px rgba(0,0,0,.45);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:Archivo,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:15px; line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1180px; margin:0 auto; padding:44px 24px 88px}
+
+/* ---------- header ---------- */
+header{display:flex; flex-direction:column; gap:14px; margin-bottom:38px}
+.eyebrow{
+  font-size:11px; font-weight:600; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--ocean); display:flex; align-items:center; gap:10px;
+}
+.eyebrow::after{content:""; flex:1; height:1px; background:var(--line)}
+h1{
+  font-family:Anton,Impact,sans-serif; font-weight:400; margin:0;
+  font-size:clamp(40px,7vw,68px); line-height:.94; letter-spacing:-.01em;
+  text-transform:uppercase; text-wrap:balance;
+}
+h1 em{font-style:normal; color:var(--ocean)}
+.standfirst{max-width:62ch; color:var(--ink-2); font-size:16px; margin:0}
+.spec{display:flex; flex-wrap:wrap; gap:8px; margin-top:4px}
+.chip{
+  font-family:"JetBrains Mono",ui-monospace,monospace; font-size:11.5px; font-weight:700;
+  letter-spacing:.03em; padding:5px 10px; border-radius:5px;
+  background:var(--surface); border:1px solid var(--line); color:var(--ink-2);
+}
+.chip.hot{background:var(--ocean-soft); border-color:transparent; color:var(--ocean)}
+
+/* ---------- layout ---------- */
+.cols{display:grid; grid-template-columns:352px 1fr; gap:44px; align-items:start}
+@media (max-width:920px){.cols{grid-template-columns:1fr; gap:34px}}
+
+.player{position:sticky; top:28px; display:flex; flex-direction:column; gap:14px}
+@media (max-width:920px){.player{position:static}}
+
+/* ---------- phone stage ---------- */
+.stage{
+  position:relative; width:100%; aspect-ratio:9/16; border-radius:22px; overflow:hidden;
+  background:#08181B; box-shadow:var(--shadow); border:1px solid var(--line);
+  container-type:inline-size;
+}
+.scene{position:absolute; inset:0; transition:opacity .06s linear}
+.grain{
+  position:absolute; inset:0; opacity:.16; mix-blend-mode:overlay; pointer-events:none;
+  background-image:radial-gradient(circle at 1px 1px, #fff 0.6px, transparent 0);
+  background-size:3px 3px;
+}
+.vig{position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(120% 80% at 50% 45%, transparent 40%, rgba(0,0,0,.34) 100%)}
+
+/* scene palettes — diagrammatic stand-ins, not footage */
+.sc-beach{background:
+  radial-gradient(48% 30% at 74% 12%, rgba(255,244,214,.95), transparent 62%),
+  linear-gradient(180deg,#7EC8E8 0%,#4FB4D8 26%,#12A7B8 44%,#3FCBC9 58%,#F2E7D2 72%,#FBF4E6 100%)}
+.sc-under{background:
+  repeating-linear-gradient(107deg, rgba(214,255,255,.20) 0 10px, transparent 10px 46px),
+  linear-gradient(180deg,#38C7D6 0%,#0E93AC 34%,#075E7C 72%,#0A4257 100%)}
+.sc-surface{background:
+  radial-gradient(46% 34% at 50% 44%, rgba(255,255,255,.92), transparent 66%),
+  linear-gradient(180deg,#9FE4F0 0%,#2FBBD4 40%,#0B8FAA 100%)}
+.sc-harbour{background:
+  radial-gradient(44% 26% at 50% 30%, rgba(255,214,150,.9), transparent 66%),
+  linear-gradient(180deg,#FFCE86 0%,#F79A4E 32%,#C9633B 52%,#5C3F52 66%,#2C3350 100%)}
+.sc-dusk{background:
+  linear-gradient(180deg,#12204C 0%,#22346B 40%,#8A5A5A 56%,#E2733A 62%,#2A2438 70%,#141727 100%)}
+.sc-dusknear{background:
+  radial-gradient(52% 34% at 42% 62%, rgba(226,115,58,.42), transparent 70%),
+  linear-gradient(180deg,#101C44 0%,#1C2B5C 55%,#0D1330 100%)}
+.sc-lookout{background:
+  linear-gradient(180deg,#8FD4EE 0%,#4FA8D6 32%,#1E6FA8 58%,#134E7E 100%)}
+.sc-golden{background:
+  radial-gradient(58% 40% at 50% 44%, rgba(255,214,145,.95), transparent 72%),
+  linear-gradient(180deg,#F5B064 0%,#E07C3C 55%,#8A4A33 100%)}
+.sc-cliff{background:
+  radial-gradient(50% 26% at 50% 22%, rgba(255,236,190,.92), transparent 68%),
+  linear-gradient(180deg,#FFD79A 0%,#F7AE68 34%,#E08A4E 52%,#3E5340 66%,#25361F 100%)}
+
+/* ---------- captions ---------- */
+.cap{
+  position:absolute; left:8.3%; right:23.1%; text-align:center;
+  transform:translateY(-50%); color:#fff; pointer-events:none;
+  text-shadow:0 2px 0 #000, 0 -2px 0 #000, 2px 0 0 #000, -2px 0 0 #000,
+              0 4px 14px rgba(0,0,0,.55);
+}
+.cap.pop{animation:pop .14s cubic-bezier(.2,1.5,.4,1) both}
+@keyframes pop{from{transform:translateY(-50%) scale(1.09)} to{transform:translateY(-50%) scale(1)}}
+.cap-hook,.cap-scene{font-family:Anton,Impact,sans-serif; text-transform:uppercase; line-height:1.03}
+.cap-hook{font-size:8.2cqw}
+.cap-scene{font-size:7cqw}
+.cap-hook em{font-style:normal; color:#FFD24A}
+.cap-logo{font-family:Anton,Impact,sans-serif; font-size:7.4cqw; letter-spacing:.02em}
+.cap-logo span{color:#FFD24A}
+.cap-cta{
+  font-family:Anton,Impact,sans-serif; font-size:3.4cqw; letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.cap-terms{font-family:Archivo,sans-serif; font-size:2.1cqw; font-weight:500; opacity:.78;
+  text-shadow:0 1px 4px rgba(0,0,0,.8)}
+
+/* ---------- stage furniture ---------- */
+.hud{
+  position:absolute; top:10px; left:10px; right:10px; display:flex;
+  justify-content:space-between; align-items:flex-start; gap:8px; pointer-events:none;
+}
+.hud b, .hud i{
+  font-family:"JetBrains Mono",monospace; font-size:9.5px; font-weight:700; font-style:normal;
+  letter-spacing:.05em; padding:4px 7px; border-radius:4px;
+  background:rgba(6,20,22,.62); color:#EAF7F7; backdrop-filter:blur(6px);
+}
+.safe{position:absolute; inset:0; pointer-events:none; opacity:0; transition:opacity .18s}
+.safe.on{opacity:1}
+.safe i{position:absolute; left:8.3%; right:23.1%; top:15.6%; bottom:27.1%;
+  border:1px dashed rgba(255,255,255,.62); border-radius:3px}
+.safe u{position:absolute; right:0; top:46%; bottom:14%; width:23.1%;
+  background:repeating-linear-gradient(45deg, rgba(255,80,80,.16) 0 6px, transparent 6px 12px);
+  border-left:1px dashed rgba(255,120,120,.7); text-decoration:none}
+.safe b{position:absolute; left:0; right:0; bottom:0; height:14%;
+  background:repeating-linear-gradient(45deg, rgba(255,80,80,.16) 0 6px, transparent 6px 12px);
+  border-top:1px dashed rgba(255,120,120,.7)}
+
+/* ---------- transport ---------- */
+.transport{
+  background:var(--surface); border:1px solid var(--line); border-radius:12px;
+  padding:12px 14px; display:flex; flex-direction:column; gap:11px; box-shadow:var(--shadow);
+}
+.tline{display:flex; align-items:center; gap:11px}
+button.play{
+  width:38px; height:38px; flex:none; border-radius:9px; border:none; cursor:pointer;
+  background:var(--ocean); color:var(--surface); display:grid; place-items:center;
+  font-size:14px; transition:transform .12s, filter .12s;
+}
+button.play:hover{filter:brightness(1.1)}
+button.play:active{transform:scale(.94)}
+button.play:focus-visible, .seg:focus-visible, .row:focus-visible, .toggle:focus-visible{
+  outline:2px solid var(--sun); outline-offset:2px;
+}
+.tc{font-family:"JetBrains Mono",monospace; font-size:13px; font-weight:700;
+  font-variant-numeric:tabular-nums; letter-spacing:-.02em}
+.tc span{color:var(--ink-3); font-weight:400}
+.now{
+  margin-left:auto; text-align:right; font-size:11px; color:var(--ink-2);
+  line-height:1.25; max-width:150px;
+}
+.now b{display:block; font-size:12.5px; color:var(--ink); font-weight:600}
+input[type=range]{
+  -webkit-appearance:none; appearance:none; width:100%; height:5px; border-radius:3px;
+  background:var(--line-soft); cursor:pointer;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none; width:15px; height:15px; border-radius:50%;
+  background:var(--ocean); border:2px solid var(--surface); box-shadow:0 1px 4px rgba(0,0,0,.3);
+}
+input[type=range]::-moz-range-thumb{
+  width:15px; height:15px; border-radius:50%; border:2px solid var(--surface);
+  background:var(--ocean); box-shadow:0 1px 4px rgba(0,0,0,.3);
+}
+.toggle{
+  display:flex; align-items:center; gap:7px; font-size:11.5px; color:var(--ink-2);
+  cursor:pointer; user-select:none; background:none; border:none; padding:2px; font-family:inherit;
+}
+.toggle .sw{width:26px; height:15px; border-radius:8px; background:var(--line);
+  position:relative; transition:background .16s; flex:none}
+.toggle .sw::after{content:""; position:absolute; top:2px; left:2px; width:11px; height:11px;
+  border-radius:50%; background:var(--surface); transition:transform .16s}
+.toggle[aria-pressed="true"] .sw{background:var(--ocean)}
+.toggle[aria-pressed="true"] .sw::after{transform:translateX(11px)}
+.disclaimer{
+  font-size:11.5px; color:var(--ink-3); line-height:1.45; padding:11px 13px;
+  border-left:2px solid var(--sun); background:var(--surface-2); border-radius:0 7px 7px 0;
+}
+
+/* ---------- beat ruler ---------- */
+.ruler{margin-bottom:26px}
+.ruler h2, .sheet h2{
+  font-size:11px; font-weight:600; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--ink-3); margin:0 0 10px;
+}
+.track{display:flex; gap:2px; height:46px}
+.seg{
+  flex-grow:var(--w); flex-basis:0; min-width:0; border:none; cursor:pointer; padding:0;
+  border-radius:4px; background:var(--surface); border:1px solid var(--line);
+  position:relative; overflow:hidden; transition:border-color .14s, background .14s;
+  font-family:"JetBrains Mono",monospace; font-size:9px; font-weight:700; color:var(--ink-3);
+}
+.seg:hover{border-color:var(--ocean)}
+.seg[data-live="1"]{background:var(--ocean-soft); border-color:var(--ocean); color:var(--ocean)}
+.seg[data-mont="1"]{border-style:dashed}
+.seg .fill{position:absolute; inset:0 auto 0 0; width:0; background:var(--ocean); opacity:.16}
+.beats{display:flex; gap:2px; margin-top:5px}
+.beats i{flex:1; height:4px; background:var(--line-soft); border-radius:1px}
+.beats i.bar{background:var(--line); height:7px; margin-top:-3px}
+.rulerfoot{display:flex; justify-content:space-between; margin-top:7px;
+  font-family:"JetBrains Mono",monospace; font-size:10px; color:var(--ink-3)}
+
+/* ---------- shot sheet ---------- */
+.sheet{display:flex; flex-direction:column; gap:7px}
+.row{
+  display:grid; grid-template-columns:52px 1fr; gap:14px; text-align:left; width:100%;
+  background:var(--surface); border:1px solid var(--line); border-radius:10px;
+  padding:14px 16px; cursor:pointer; font-family:inherit; color:inherit;
+  transition:border-color .14s, transform .14s, box-shadow .14s;
+}
+.row:hover{border-color:var(--ocean); transform:translateX(2px)}
+.row[data-live="1"]{border-color:var(--ocean); box-shadow:inset 3px 0 0 var(--ocean)}
+.num{
+  font-family:Anton,Impact,sans-serif; font-size:26px; line-height:1;
+  color:var(--line); transition:color .14s;
+}
+.row[data-live="1"] .num{color:var(--ocean)}
+.row[data-mont="1"] .num{font-size:18px; padding-top:5px}
+.rtop{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap}
+.rtitle{font-weight:600; font-size:15.5px}
+.rid{
+  font-family:"JetBrains Mono",monospace; font-size:10px; font-weight:700; padding:2px 6px;
+  border-radius:4px; background:var(--surface-2); color:var(--ink-3); letter-spacing:.04em;
+}
+.rtime{
+  margin-left:auto; font-family:"JetBrains Mono",monospace; font-size:11.5px;
+  color:var(--ink-2); font-variant-numeric:tabular-nums; white-space:nowrap;
+}
+.rcam{font-size:13px; color:var(--ink-2); margin-top:3px}
+.rcap{
+  margin-top:8px; font-family:Anton,Impact,sans-serif; font-size:13px; letter-spacing:.02em;
+  text-transform:uppercase; color:var(--ink); line-height:1.25;
+}
+.rcap::before{content:"TEXT "; color:var(--sun); font-size:10px; letter-spacing:.12em}
+.rnote{
+  margin-top:8px; font-size:12.5px; color:var(--ink-2); padding-left:10px;
+  border-left:2px solid var(--sun);
+}
+footer{
+  margin-top:42px; padding-top:20px; border-top:1px solid var(--line);
+  font-size:12.5px; color:var(--ink-3); display:flex; justify-content:space-between;
+  gap:16px; flex-wrap:wrap;
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important; transition-duration:.01ms !important}
+}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">99aupairs · paid social · competition</div>
+  <h1>Competition<br>Reel <em>/ 18s</em></h1>
+  <p class="standfirst">Ten of these eighteen seconds never mention au pairing. The reel sells
+  an Australian summer to someone already living one — then reveals, at eleven seconds, that
+  applying or referring a friend is how you enter.</p>
+  <div class="spec">
+    <span class="chip hot">9:16 · 1080×1920</span>
+    <span class="chip">30 FPS</span>
+    <span class="chip">18.00s / 540f</span>
+    <span class="chip">120 BPM</span>
+    <span class="chip">12 CUTS · 9 GENERATIONS</span>
+  </div>
+</header>
+
+<div class="cols">
+  <div class="player">
+    <div class="stage" id="stage">
+      <div class="scene" id="scene"></div>
+      <div class="grain"></div>
+      <div class="vig"></div>
+      <div id="caps"></div>
+      <div class="safe" id="safe"><i></i><u></u><b></b></div>
+      <div class="hud"><b id="hudShot">SHOT 1</b><i id="hudTc">00:00</i></div>
+    </div>
+
+    <div class="transport">
+      <div class="tline">
+        <button class="play" id="play" aria-label="Play storyboard">▶</button>
+        <div class="tc"><span id="tcNow">00.00</span><span> / 18.00</span></div>
+        <div class="now"><b id="nowTitle">Beach sprint</b><span id="nowCam">Low FPV chase</span></div>
+      </div>
+      <input type="range" id="scrub" min="0" max="18" step="0.01" value="0" aria-label="Scrub timeline">
+      <button class="toggle" id="safeBtn" aria-pressed="false">
+        <span class="sw"></span> Show TikTok / Reels safe zones
+      </button>
+    </div>
+
+    <p class="disclaimer"><strong>This is a timing storyboard, not footage.</strong> The panels
+    are colour blocks standing in for each shot — what's real here is the cut rhythm, the caption
+    timings and the safe-zone positions. Generate the footage from
+    <code>prompts/01-shot-prompts.md</code>.</p>
+  </div>
+
+  <div>
+    <section class="ruler">
+      <h2>Cut sheet · every cut lands on a beat</h2>
+      <div class="track" id="track"></div>
+      <div class="beats" id="beats"></div>
+      <div class="rulerfoot"><span>0.00s</span><span>HARD CUTS ONLY</span><span>18.00s</span></div>
+    </section>
+
+    <section class="sheet" id="sheet">
+      <h2>Shot by shot</h2>
+    </section>
+
+    <footer>
+      <span>99aupairs — competition reel v1</span>
+      <span>Cast, prompts &amp; assembly in <code>reels/99aupairs-competition/</code></span>
+    </footer>
+  </div>
+</div>
+</div>
+
+<script>
+const DUR = 18;
+
+const SHOTS = [
+  {n:1, id:"SHOT 1", t0:0,    t1:2,    title:"Beach sprint", sc:"beach",
+   cam:"Low FPV chase behind → rise over water",
+   note:"The first six frames decide whether the reel works. Pick the take where sand spray hits the lens."},
+  {n:2, id:"SHOT 2A", t0:2,   t1:4,    title:"Underwater turtle", sc:"under",
+   cam:"Slow drift up from the sea floor, GoPro wide",
+   note:"Camera rising over water cuts into camera under water. Strongest cut in the reel — protect it."},
+  {n:3, id:"SHOT 2B", t0:4,   t1:5,    title:"Surface scream", sc:"surface",
+   cam:"Handheld at water level, droplets on lens",
+   note:"Emotional peak of the first half. Full faces visible — start frame required."},
+  {n:4, id:"SHOT 3", t0:5,    t1:8,    title:"Sydney Harbour", sc:"harbour",
+   cam:"90° orbit, golden hour rim light",
+   note:"Landmarks are the failure point. Reject bent Opera House shells or a bridge that melts on the orbit."},
+  {n:5, id:"SHOT 4A", t0:8,   t1:9.5,  title:"Penguin parade", sc:"dusk",
+   cam:"Static low angle at sand level",
+   note:"Little penguins are 33cm. An emperor penguin reads as fake to every Australian instantly."},
+  {n:6, id:"SHOT 4B", t0:9.5, t1:11,   title:"The quiet reaction", sc:"dusknear",
+   cam:"Slow handheld push in",
+   note:"The breath before the pitch. Quiet and astonished, never performed."},
+  {n:7, id:"SHOT 2A", t0:11,  t1:11.5, title:"Montage — turtle", sc:"under", m:1, cam:"Hard cut on the beat"},
+  {n:8, id:"SHOT 3", t0:11.5, t1:12,   title:"Montage — harbour", sc:"harbour", m:1, cam:"Hard cut on the beat"},
+  {n:9, id:"SHOT 4A", t0:12,  t1:12.5, title:"Montage — penguins", sc:"dusk", m:1, cam:"Hard cut on the beat"},
+  {n:10,id:"SHOT 5D", t0:12.5,t1:13,   title:"Montage — coastal lookout", sc:"lookout", m:1,
+   cam:"Whip pan, hair across faces",
+   note:"The only new clip the montage needs — the other three are reused."},
+  {n:11,id:"SHOT 6", t0:13,   t1:15,   title:"Best friends", sc:"golden",
+   cam:"Handheld drift in, warm rim light",
+   note:"Completely candid. They are not looking at the camera."},
+  {n:12,id:"SHOT 7", t0:15,   t1:18,   title:"Clifftop CTA", sc:"cliff",
+   cam:"Drone pull back and rise",
+   note:"Cast in the lower third. The upper half must be empty sky for the logo lockup."}
+];
+
+const CAPS = [
+  {t0:0.15, t1:1.95,  y:36.5, k:"hook",  x:"WANT TO WIN AN<br>EPIC AUSSIE ADVENTURE? 🇦🇺"},
+  {t0:2.10, t1:4.85,  y:65,   k:"scene", x:"🐢 SNORKEL WITH<br>THE TURTLES"},
+  {t0:5.10, t1:7.85,  y:65,   k:"scene", x:"🥂 PARTY ON<br>SYDNEY HARBOUR"},
+  {t0:8.10, t1:10.85, y:65,   k:"scene", x:"🐧 WATCH THE<br>PENGUIN PARADE"},
+  {t0:11.10,t1:12.90, y:36.5, k:"hook",  x:"SO… WHAT WOULD MAKE<br><em>YOU</em> A GREAT AU PAIR?"},
+  {t0:13.10,t1:14.90, y:36.5, k:"hook",  x:"AND WHO WOULD YOU<br>TAKE WITH YOU? 👯‍♀️"},
+  {t0:15.10,t1:16.40, y:60,   k:"scene", x:"TELL US →<br>APPLY OR REFER YOUR BESTIE"},
+  {t0:16.50,t1:18.00, y:60,   k:"scene", x:"WIN AN ADVENTURE<br>TOGETHER ✨"},
+  {t0:15.60,t1:18.00, y:21.9, k:"logo",  x:"99<span>aupairs</span>"},
+  {t0:16.50,t1:18.00, y:69.3, k:"cta",   x:"Apply now · 99aupairs"},
+  {t0:15.60,t1:18.00, y:72.4, k:"terms", x:"Competition T&amp;Cs apply. 18+. Valid AU visa holders."}
+];
+
+const $ = s => document.querySelector(s);
+const fmt = t => t.toFixed(2).padStart(5,"0");
+const tcOf = t => String(Math.floor(t)).padStart(2,"0")+":"+String(Math.round(t%1*30)).padStart(2,"0");
+
+/* ---- build the beat ruler ---- */
+const track = $("#track");
+SHOTS.forEach(s => {
+  const b = document.createElement("button");
+  b.className = "seg";
+  b.style.setProperty("--w", s.t1 - s.t0);
+  b.dataset.mont = s.m ? "1" : "0";
+  b.dataset.i = s.n - 1;
+  b.setAttribute("aria-label", s.title + " at " + fmt(s.t0) + " seconds");
+  b.innerHTML = '<span class="fill"></span>' + s.n;
+  b.addEventListener("click", () => seek(s.t0));
+  track.appendChild(b);
+});
+const beats = $("#beats");
+for (let i = 0; i < DUR * 2; i++) {
+  const i2 = document.createElement("i");
+  if (i % 4 === 0) i2.className = "bar";
+  beats.appendChild(i2);
+}
+
+/* ---- build the shot sheet ---- */
+const sheet = $("#sheet");
+SHOTS.forEach(s => {
+  const caps = CAPS.filter(c => c.t0 < s.t1 && c.t1 > s.t0 && c.k !== "terms" && c.k !== "logo");
+  const r = document.createElement("button");
+  r.className = "row";
+  r.dataset.i = s.n - 1;
+  r.dataset.mont = s.m ? "1" : "0";
+  r.innerHTML =
+    '<div class="num">' + String(s.n).padStart(2,"0") + '</div><div>' +
+    '<div class="rtop"><span class="rtitle">' + s.title + '</span>' +
+    '<span class="rid">' + s.id + '</span>' +
+    '<span class="rtime">' + fmt(s.t0) + ' → ' + fmt(s.t1) +
+    '  ·  ' + (s.t1 - s.t0).toFixed(2) + 's</span></div>' +
+    '<div class="rcam">' + s.cam + '</div>' +
+    (caps.length ? '<div class="rcap">' + caps.map(c => c.x.replace(/<br>/g," ").replace(/<\/?em>/g,"")).join(" / ") + '</div>' : '') +
+    (s.note ? '<div class="rnote">' + s.note + '</div>' : '') +
+    '</div>';
+  r.addEventListener("click", () => seek(s.t0));
+  sheet.appendChild(r);
+});
+
+/* ---- playback ---- */
+const scene = $("#scene"), capBox = $("#caps"), scrub = $("#scrub");
+const segs = [...document.querySelectorAll(".seg")], rows = [...document.querySelectorAll(".row")];
+let t = 0, playing = false, last = 0, capKey = "", shotKey = -1;
+
+function render(){
+  const s = SHOTS.find(s => t >= s.t0 && t < s.t1) || SHOTS[SHOTS.length - 1];
+
+  if (s.n !== shotKey){
+    shotKey = s.n;
+    scene.className = "scene sc-" + s.sc;
+    $("#hudShot").textContent = s.id + (s.m ? " ·  MONTAGE" : "");
+    $("#nowTitle").textContent = s.title;
+    $("#nowCam").textContent = s.cam;
+    segs.forEach(b => b.dataset.live = (+b.dataset.i === s.n - 1) ? "1" : "0");
+    rows.forEach(b => b.dataset.live = (+b.dataset.i === s.n - 1) ? "1" : "0");
+  }
+  const seg = segs[s.n - 1];
+  if (seg) seg.querySelector(".fill").style.width = ((t - s.t0) / (s.t1 - s.t0) * 100) + "%";
+  segs.forEach((b,i) => { if (i !== s.n - 1) b.querySelector(".fill").style.width = "0%"; });
+
+  const on = CAPS.filter(c => t >= c.t0 && t < c.t1);
+  const key = on.map(c => c.t0).join("|");
+  if (key !== capKey){
+    capKey = key;
+    capBox.innerHTML = on.map(c =>
+      '<div class="cap pop cap-' + c.k + '" style="top:' + c.y + '%">' + c.x + '</div>'
+    ).join("");
+  }
+
+  $("#tcNow").textContent = fmt(t);
+  $("#hudTc").textContent = tcOf(t);
+  scrub.value = t;
+}
+
+function seek(v){ t = Math.max(0, Math.min(DUR, v)); capKey = ""; render(); }
+
+function loop(now){
+  if (!playing) return;
+  t += (now - last) / 1000;
+  last = now;
+  if (t >= DUR){ t = 0; capKey = ""; shotKey = -1; }
+  render();
+  requestAnimationFrame(loop);
+}
+
+$("#play").addEventListener("click", () => {
+  playing = !playing;
+  $("#play").textContent = playing ? "❚❚" : "▶";
+  $("#play").setAttribute("aria-label", playing ? "Pause storyboard" : "Play storyboard");
+  if (playing){ last = performance.now(); requestAnimationFrame(loop); }
+});
+scrub.addEventListener("input", e => seek(parseFloat(e.target.value)));
+$("#safeBtn").addEventListener("click", e => {
+  const on = e.currentTarget.getAttribute("aria-pressed") === "true";
+  e.currentTarget.setAttribute("aria-pressed", String(!on));
+  $("#safe").classList.toggle("on", !on);
+});
+document.addEventListener("keydown", e => {
+  if (e.code === "Space" && e.target === document.body){ e.preventDefault(); $("#play").click(); }
+  if (e.code === "ArrowRight") seek(t + 0.5);
+  if (e.code === "ArrowLeft") seek(t - 0.5);
+});
+
+render();
+</script>

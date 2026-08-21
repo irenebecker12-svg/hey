@@ -1,0 +1,67 @@
+{
+  "negative_image": "text, watermark, logo, distorted hands, extra fingers, missing fingers, deformed face, plastic skin, waxy skin, airbrushed skin, oversaturated, HDR, stock photo look, corporate, staged posing, studio lighting, mutated limbs, extra limbs, uncanny valley, doll eyes, duplicate people, identical twins, low resolution",
+  "negative_video": "text, watermark, logo, subtitles, captions, distorted hands, extra fingers, deformed face, warped face, changing face, plastic skin, waxy skin, oversaturated, HDR, stock photo look, corporate, staged posing, studio lighting, motion blur, mutated limbs, extra limbs, uncanny valley, duplicate people, morphing, flickering, low resolution",
+  "stills": {
+    "hero": "Candid documentary photograph of two young women standing close together on a sunlit Australian beach, mid-laugh, looking at each other rather than the camera. LEFT — 24, Spanish. Warm olive skin with visible pores and sun freckles across the nose. Dark brown wavy shoulder-length hair, salt-damp and imperfect. Brown eyes, thick natural brows, a small gap between her front teeth. 168cm, athletic-slim. Small gold hoop earrings, thin white shell necklace. Rust-orange bikini. RIGHT — 22, German. Fair skin, sun-pink across the shoulders and nose, light freckles. Dirty-blonde long straight hair falling out of a messy bun. Blue-grey eyes, pale lashes. 175cm, noticeably taller than the woman on the left. Slim. Small silver nose stud, faded red string bracelet on her left wrist. Sage-green bikini. Bright midday sun, turquoise ocean and white sand behind them. Both faces fully visible and sharp. Shot on Sony FX3, 35mm, shallow depth of field, natural sunlight, documentary realism, natural imperfect skin texture, film grain, true-to-life colour.",
+    "wardrobe_harbour": "Same two women from the reference image, unchanged faces. Now in summer dresses on a boat deck on Sydney Harbour at golden hour. The Spanish woman wears a white cotton sundress and gold hoop earrings; the German woman wears a pale-blue linen slip dress. Candid, laughing, not looking at camera. Shot on Sony FX3, 35mm, shallow depth of field, natural sunlight, documentary realism, natural imperfect skin texture, film grain.",
+    "wardrobe_dusk": "Same two women from the reference image, unchanged faces. Now sitting on a dark beach at dusk in oversized jackets. The Spanish woman wears a cream fisherman jumper; the German woman wears a navy puffer jacket. Deep blue twilight, soft orange residual light on their faces. Candid, quiet. Shot on Sony FX3, 35mm, natural low light, documentary realism, natural imperfect skin texture, film grain.",
+    "wardrobe_cliff": "Same two women from the reference image, unchanged faces. Now on a grassy coastal clifftop at golden hour. The Spanish woman wears faded denim shorts and a white tank; the German woman wears khaki shorts and a cropped tee. Laughing together, wind in their hair. Shot on Sony FX3, 24mm, natural sunlight, documentary realism, natural imperfect skin texture, film grain.",
+    "wardrobe_snorkel": "Same two women from the reference image, unchanged faces. Now in shallow turquoise water wearing snorkel masks pushed up on their foreheads, wet hair, mask marks on their cheeks, laughing. The Spanish woman in a rust-orange bikini, the German woman in a sage-green bikini. Shot on Sony FX3, 35mm, natural sunlight, documentary realism, natural imperfect skin texture, film grain."
+  },
+  "shots": [
+    {
+      "id": "shot1",
+      "title": "Beach sprint",
+      "prompt": "Two young women in bikinis sprinting hand in hand across blinding white sand toward a turquoise ocean, seen from behind, long hair flying, wet sand spraying up from their heels. They are laughing and pulling each other forward. The camera races low and fast behind them at ankle height, then lifts and climbs over their heads out across the open water. Harsh midday Australian sun, strong lens flare, deep blue horizon. Shot on Sony FX3 and GoPro, 24mm, natural sunlight, documentary realism, candid, film grain, true-to-life colour, 9:16 vertical.",
+      "still": "wardrobe_snorkel"
+    },
+    {
+      "id": "shot2a",
+      "title": "Underwater turtle",
+      "prompt": "Two young women snorkelling in crystal-clear shallow tropical water, filmed from below. A large green sea turtle glides slowly between them, close to camera. Sunbeams cut through the surface above in moving shafts, coral garden on the sand floor below. The women hang weightless, one reaches a slow hand toward the turtle. Bubbles drift upward. The camera drifts slowly upward from the sea floor. GoPro wide, natural underwater light, documentary realism, film grain, true-to-life colour, 9:16 vertical.",
+      "still": "wardrobe_snorkel"
+    },
+    {
+      "id": "shot2b",
+      "title": "Surface scream",
+      "prompt": "Two young women burst up through the surface of turquoise water, rip their snorkel masks off and scream with delight at each other, water streaming down their faces and hair, mask marks pressed into their cheeks, absolutely elated, one grabs the other's shoulder. Handheld camera at water level, water droplets on the lens. Shot on Sony FX3, 35mm, natural sunlight, documentary realism, candid, natural imperfect skin texture, film grain, 9:16 vertical.",
+      "still": "wardrobe_snorkel"
+    },
+    {
+      "id": "shot3",
+      "title": "Sydney Harbour",
+      "prompt": "Two young women in summer dresses laughing and dancing on the open deck of a boat on Sydney Harbour, glasses raised, hair moving in the wind. The Sydney Opera House and the Sydney Harbour Bridge are clearly visible behind them. Other young people celebrating, soft and out of focus in the background. Warm golden-hour light, sun low and behind them, rim light on their hair. The camera orbits smoothly around the pair. Shot on Sony FX3, 35mm, shallow depth of field, documentary realism, candid, film grain, true-to-life colour, 9:16 vertical.",
+      "still": "wardrobe_harbour"
+    },
+    {
+      "id": "shot4a",
+      "title": "Penguin parade",
+      "prompt": "Tiny little penguins, only 33cm tall, waddling in a loose group up a dark wet beach from the ocean at dusk on Phillip Island. Deep blue twilight, last band of orange light on the horizon, wet sand reflecting the sky. Low static camera at sand level, the small penguins moving toward and past the lens. Shot on Sony FX3, 50mm, low available light, documentary realism, film grain, true-to-life colour, 9:16 vertical.",
+      "still": null
+    },
+    {
+      "id": "shot4b",
+      "title": "Quiet reaction",
+      "prompt": "Two young women sitting close together on a dark beach at dusk wrapped in oversized jackets, watching something off-camera with delight. They turn to look at each other and share a quiet astonished smile, one covers her mouth in awe. Deep blue twilight, soft orange residual light on their faces, no harsh light source. The camera pushes in slowly, handheld. Shot on Sony FX3, 35mm, natural low light, documentary realism, candid, natural imperfect skin texture, film grain, 9:16 vertical.",
+      "still": "wardrobe_dusk"
+    },
+    {
+      "id": "shot5d",
+      "title": "Coastal lookout",
+      "prompt": "Two young women standing on a windy coastal lookout high above the ocean, laughing as their hair whips completely across their faces, trying to hold it back and failing, grabbing each other. Vast blue Australian coastline behind them. Bright natural daylight. Handheld camera with a slight whip pan onto them. Shot on Sony FX3, 24mm, natural sunlight, documentary realism, candid, film grain, true-to-life colour, 9:16 vertical.",
+      "still": "wardrobe_cliff"
+    },
+    {
+      "id": "shot6",
+      "title": "Best friends",
+      "prompt": "Two young women laughing hard together, arms wrapped around each other's shoulders, foreheads nearly touching, one doubled over laughing. Golden late-afternoon sun, warm rim light. Completely candid and unposed, they are not looking at the camera. Handheld camera drifting slowly in. Shot on Sony FX3, 50mm, shallow depth of field, natural sunlight, documentary realism, natural imperfect skin texture, film grain, 9:16 vertical.",
+      "still": "wardrobe_cliff"
+    },
+    {
+      "id": "shot7",
+      "title": "Clifftop CTA",
+      "prompt": "Wide shot of two young women standing side by side on a grassy clifftop at golden hour, overlooking a vast Australian coastline and ocean far below. They turn toward the camera and laugh. They are positioned low in the frame, in the bottom third. An enormous open golden sky fills the entire upper half of the frame, empty, with no clouds in the centre. The drone camera pulls back and rises slowly. Shot on Sony FX3, 24mm, natural sunlight, documentary realism, film grain, true-to-life colour, 9:16 vertical.",
+      "still": "wardrobe_cliff"
+    }
+  ]
+}
